@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L.U.M.I.A - Liability & Underwriting Management Insurance Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* L.U.M.I.A - Liability & Underwriting Management Insurance Assistant Styling */
+        :root {
+            --primary-blue: #1e40af;
+            --primary-dark: #1e3a8a;
+            --accent-teal: #0d9488;
+            --success-green: #059669;
+            --warning-orange: #ea580c;
+            --danger-red: #dc2626;
+            --neutral-50: #f8fafc;
+            --neutral-100: #f1f5f9;
+            --neutral-200: #e2e8f0;
+            --neutral-300: #cbd5e1;
+            --neutral-400: #94a3b8;
+            --neutral-500: #64748b;
+            --neutral-600: #475569;
+            --neutral-700: #334155;
+            --neutral-800: #1e293b;
+            --neutral-900: #0f172a;
+            --shield-gradient: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-teal) 100%);
+            --protection-gradient: linear-gradient(135deg, var(--accent-teal) 0%, var(--success-green) 100%);
+            --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.12);
+            --border-radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--neutral-800);
+            background: linear-gradient(135deg, var(--neutral-50) 0%, #f0fdfa 100%);
+            min-height: 100vh;
+        }
+
+        /* Navigation Styles */
+        .professional-nav {
+            background: var(--shield-gradient);
+            box-shadow: 0 4px 20px rgba(30, 64, 175, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            font-size: 36px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        /* Mobile Menu Toggle Button */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-toggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu-toggle span {
+            width: 24px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+            transition: var(--transition);
+            transform-origin: center;
+        }
+
+        .mobile-menu-toggle span.active:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .mobile-menu-toggle span.active:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle span.active:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 8px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 12px 20px;
+            border-radius: 12px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Welcome Page Styles */
+        .welcome-hero {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 80px 40px;
+            background: var(--protection-gradient);
+            border-radius: 24px;
+            color: white;
+            box-shadow: var(--shadow-hover);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .welcome-title {
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-subtitle {
+            font-size: 24px;
+            font-weight: 300;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-subtitle-acronym {
+            font-size: 18px;
+            font-weight: 400;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 16px auto 24px auto;
+            line-height: 1.5;
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+        }
+
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            min-height: calc(100vh - 80px);
+        }
+
+        .page-content {
+            display: none;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Welcome Options Grid */
+        .welcome-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            margin: 60px 0;
+        }
+
+        .option-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--neutral-200);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--shield-gradient);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .option-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary-blue);
+        }
+
+        .option-icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        .option-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--neutral-900);
+            margin-bottom: 16px;
+        }
+
+        .option-description {
+            color: var(--neutral-600);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .option-btn {
+            background: var(--shield-gradient);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .option-btn:hover::before {
+            left: 100%;
+        }
+
+        .option-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.4);
+        }
+
+        /* Form and Content Styles */
+        .section-title {
+            font-size: 40px;
+            font-weight: 800;
+            color: var(--neutral-900);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 6px;
+            background: var(--shield-gradient);
+            border-radius: 3px;
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+
+        .professional-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--neutral-200);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .professional-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--shield-gradient);
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+
+        .professional-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary-blue);
+        }
+
+        .card-header {
+            margin-bottom: 32px;
+            border-bottom: 2px solid var(--neutral-100);
+            padding-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--neutral-900);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-subtitle {
+            color: var(--neutral-600);
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 700;
+            color: var(--neutral-800);
+            margin-bottom: 10px;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid var(--neutral-200);
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: var(--transition);
+            background: var(--neutral-50);
+            font-family: inherit;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .form-input::placeholder {
+            color: var(--neutral-400);
+            font-weight: 400;
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Buttons */
+        .btn-primary, .btn-success, .btn-warning {
+            background: var(--shield-gradient);
+            color: white;
+            border: none;
+            padding: 18px 36px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before, .btn-success::before, .btn-warning::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn-primary:hover::before, .btn-success:hover::before, .btn-warning:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover, .btn-success:hover, .btn-warning:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(30, 64, 175, 0.4);
+        }
+
+        .btn-success {
+            background: var(--protection-gradient);
+            box-shadow: 0 6px 20px rgba(13, 148, 136, 0.3);
+        }
+
+        .btn-success:hover {
+            box-shadow: 0 12px 30px rgba(13, 148, 136, 0.4);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning-orange) 0%, var(--danger-red) 100%);
+            box-shadow: 0 6px 20px rgba(234, 88, 12, 0.3);
+        }
+
+        .btn-warning:hover {
+            box-shadow: 0 12px 30px rgba(234, 88, 12, 0.4);
+        }
+
+        /* Results Display */
+        .analysis-results {
+            background: linear-gradient(135deg, var(--success-green) 0%, #059669 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 32px;
+            box-shadow: 0 12px 30px rgba(5, 150, 105, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .analysis-results::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: sparkle 15s infinite linear;
+        }
+
+        @keyframes sparkle {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            font-weight: 800;
+            font-size: 18px;
+            padding-top: 24px;
+            border-top: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .result-label {
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .result-value {
+            font-weight: 800;
+            font-size: 20px;
+            color: #fbbf24;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Coverage Recommendations */
+        .coverage-recommendations {
+            background: linear-gradient(135deg, rgba(13, 148, 136, 0.1) 0%, rgba(5, 150, 105, 0.05) 100%);
+            border: 3px solid var(--accent-teal);
+            border-radius: 16px;
+            padding: 28px;
+            margin-top: 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .coverage-recommendations::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(13, 148, 136, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .coverage-title {
+            color: var(--accent-teal);
+            font-weight: 800;
+            font-size: 20px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Script Sections */
+        .script-section {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            border-left: 6px solid var(--primary-blue);
+            box-shadow: var(--shadow-card);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .script-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, rgba(30, 64, 175, 0.02) 100%);
+            pointer-events: none;
+        }
+
+        .script-section:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-left-color: var(--accent-teal);
+        }
+
+        .script-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--neutral-900);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .script-content {
+            background: linear-gradient(135deg, var(--neutral-50) 0%, white 100%);
+            padding: 24px;
+            border-radius: 12px;
+            font-style: italic;
+            line-height: 1.8;
+            border: 1px solid var(--neutral-200);
+            position: relative;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .copy-btn {
+            background: var(--accent-teal);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 16px;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .copy-btn:hover {
+            background: #0f766e;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(13, 148, 136, 0.3);
+        }
+
+        /* Client List */
+        .clients-list {
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        .client-item {
+            background: var(--neutral-50);
+            border: 1px solid var(--neutral-200);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .client-item:hover {
+            background: white;
+            border-color: var(--primary-blue);
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .client-name {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--neutral-900);
+            margin-bottom: 8px;
+        }
+
+        .client-details {
+            color: var(--neutral-600);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Liability Warning */
+        .liability-warning {
+            background: linear-gradient(135deg, var(--danger-red) 0%, #991b1b 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 32px;
+            box-shadow: 0 12px 30px rgba(220, 38, 38, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .liability-warning::before {
+            content: '⚠️';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 48px;
+            opacity: 0.3;
+        }
+
+        .warning-title {
+            font-weight: 800;
+            font-size: 24px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .warning-content {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 1024px) {
+            .welcome-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .welcome-title {
+                font-size: 42px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                gap: 8px;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--primary-blue);
+                padding: 24px;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            }
+            
+            .nav-menu.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .welcome-title {
+                font-size: 36px;
+            }
+            
+            .welcome-subtitle {
+                font-size: 20px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .professional-card {
+                padding: 24px;
+            }
+            
+            .welcome-hero {
+                padding: 60px 24px;
+            }
+            
+            .main-content {
+                padding: 24px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-title {
+                font-size: 28px;
+            }
+            
+            .welcome-subtitle {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .card-title {
+                font-size: 24px;
+            }
+            
+            .nav-content {
+                height: 70px;
+            }
+            
+            .nav-link {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+            
+            .professional-card {
+                padding: 20px;
+            }
+            
+            .script-section {
+                padding: 24px;
+            }
+            
+            .option-card {
+                padding: 24px;
+            }
+            
+            .form-input, .form-select {
+                padding: 14px 16px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Professional Navigation -->
+    <nav class="professional-nav">
+        <div class="nav-container">
+            <div class="nav-content">
+                <a href="#" class="logo" onclick="showPage('welcome')">
+                    <span class="logo-icon">🛡️</span>
+                    L.U.M.I.A
+                </a>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <ul class="nav-menu">
+                    <li><a href="#" class="nav-link active" onclick="showPage('welcome')">🏠 Welcome</a></li>
+                    <li><a href="#" class="nav-link" onclick="showPage('new-client')">👤 New Client</a></li>
+                    <li><a href="#" class="nav-link" onclick="showPage('current-client')">🔄 Current Client</a></li>
+                    <li><a href="#" class="nav-link" onclick="showPage('agent-resource')">📚 Agent Resource</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        
+        <!-- Welcome Page -->
+        <div id="welcome-page" class="page-content active">
+            <div class="welcome-hero">
+                <h1 class="welcome-title">L.U.M.I.A</h1>
+                <p class="welcome-subtitle-acronym">Liability & Underwriting Management Insurance Assistant</p>
+                <p class="welcome-subtitle">Professional insurance analysis and client management system designed to protect families and build wealth through strategic coverage</p>
+            </div>
+
+            <h2 class="section-title">Choose Your Path</h2>
+
+            <div class="welcome-options">
+                <div class="option-card" onclick="showPage('new-client')">
+                    <span class="option-icon">👤</span>
+                    <h3 class="option-title">New Client</h3>
+                    <p class="option-description">
+                        Comprehensive asset analysis and liability assessment for first-time insurance consultations. Build complete protection profiles.
+                    </p>
+                    <button class="option-btn">Start New Analysis</button>
+                </div>
+
+                <div class="option-card" onclick="showPage('current-client')">
+                    <span class="option-icon">🔄</span>
+                    <h3 class="option-title">Current Client</h3>
+                    <p class="option-description">
+                        Update existing client profiles, review coverage adequacy, and identify opportunities for enhanced protection and optimization.
+                    </p>
+                    <button class="option-btn">Update Client Profile</button>
+                </div>
+
+                <div class="option-card" onclick="showPage('agent-resource')">
+                    <span class="option-icon">📚</span>
+                    <h3 class="option-title">Agent Resource Center</h3>
+                    <p class="option-description">
+                        Professional scripts, closing techniques, liability education, and proven strategies for insurance sales excellence.
+                    </p>
+                    <button class="option-btn">Access Resources</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- New Client Page -->
+        <div id="new-client-page" class="page-content">
+            <div class="welcome-hero">
+                <h1 class="welcome-title">New Client Analysis</h1>
+                <p class="welcome-subtitle">Comprehensive asset collection and liability assessment for optimal coverage recommendations</p>
+            </div>
+
+            <h2 class="section-title">Asset Collection & Profile</h2>
+
+            <div class="grid-2">
+                <!-- Asset Calculator -->
+                <div class="professional-card">
+                    <div class="card-header">
+                        <h3 class="card-title">📊 Client Asset Assessment</h3>
+                        <p class="card-subtitle">Collect comprehensive financial information</p>
+                    </div>
+
+                    <form id="new-client-form">
+                        <div class="form-group">
+                            <label class="form-label">Client Full Name</label>
+                            <input type="text" id="new-client-name" class="form-input" placeholder="John & Jane Smith" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Home Value</label>
+                            <input type="number" id="new-home-value" class="form-input" placeholder="$450,000" value="450000">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Vehicle Values (Total)</label>
+                            <input type="number" id="new-vehicle-values" class="form-input" placeholder="$75,000" value="75000">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Annual Household Income</label>
+                            <input type="number" id="new-annual-income" class="form-input" placeholder="$120,000" value="120000">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Savings & Investments</label>
+                            <input type="number" id="new-savings" class="form-input" placeholder="$85,000" value="85000">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Current Life Insurance Coverage</label>
+                            <input type="number" id="new-life-insurance" class="form-input" placeholder="$250,000" value="250000">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Occupation</label>
+                            <input type="text" id="new-occupation" class="form-input" placeholder="Doctor, Engineer, Teacher...">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Age</label>
+                            <select id="new-age" class="form-select">
+                                <option value="">Select Age Range</option>
+                                <option value="25-35">25-35 years</option>
+                                <option value="35-45">35-45 years</option>
+                                <option value="45-55">45-55 years</option>
+                                <option value="55-65">55-65 years</option>
+                                <option value="65+">65+ years</option>
+                            </select>
+                        </div>
+
+                        <button type="button" onclick="calculateNewClient()" class="btn-primary">Calculate Liability Analysis</button>
+                    </form>
+                </div>
+
+                <!-- Liability Analysis Results -->
+                <div class="professional-card">
+                    <div class="card-header">
+                        <h3 class="card-title">📈 Liability Analysis Results</h3>
+                        <p class="card-subtitle">Complete exposure and protection needs</p>
+                    </div>
+
+                    <div id="new-client-results" class="analysis-results">
+                        <div class="result-item">
+                            <span class="result-label">Total Assets:</span>
+                            <span class="result-value" id="new-total-assets">$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Recommended Liability Limit:</span>
+                            <span class="result-value" id="new-recommended-liability">$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Life Insurance Gap:</span>
+                            <span class="result-value" id="new-life-insurance-gap">$0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Property Protection Need:</span>
+                            <span class="result-value" id="new-property-protection">$0</span>
+                        </div>
+                    </div>
+
+                    <div class="coverage-recommendations">
+                        <div class="coverage-title">
+                            🛡️ Coverage Recommendations
+                        </div>
+                        <div id="new-coverage-recommendations">
+                            <p style="color: var(--neutral-800); line-height: 1.6;">
+                                Complete the asset analysis to receive personalized coverage recommendations...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Risk Scenario Example -->
+            <div class="liability-warning">
+                <div class="warning-title">
+                    ⚠️ Real-World Risk Example
+                </div>
+                <div class="warning-content" id="new-risk-example">
+                    <strong>The Doctor Scenario:</strong><br><br>
+                    If you cause an accident injuring a high-earning doctor ($500,000/year income), they could sue for:<br>
+                    • Lost income: $10,000,000+ (20 years remaining career)<br>
+                    • Medical expenses: $2,000,000+<br>
+                    • Pain and suffering: $5,000,000+<br>
+                    • <strong>Total potential liability: $17,000,000+</strong><br><br>
+                    Standard $300,000 policies won't even scratch the surface. Are you protected?
+                </div>
+            </div>
+        </div>
+
+        <!-- Current Client Page -->
+        <div id="current-client-page" class="page-content">
+            <div class="welcome-hero">
+                <h1 class="welcome-title">Current Client Review</h1>
+                <p class="welcome-subtitle">Update profiles and optimize existing coverage for enhanced protection</p>
+            </div>
+
+            <h2 class="section-title">Client Portfolio Management</h2>
+
+            <div class="grid-2">
+                <!-- Client List -->
+                <div class="professional-card">
+                    <div class="card-header">
+                        <h3 class="card-title">📋 Your Client Portfolio</h3>
+                        <p class="card-subtitle">Manage existing client relationships</p>
+                    </div>
+
+                    <div id="current-clients-list" class="clients-list">
+                        <p style="text-align: center; color: var(--neutral-600); padding: 40px;">
+                            📋 No current clients.<br>
+                            Add your first client to get started!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Update Client -->
+                <div class="professional-card">
+                    <div class="card-header">
+                        <h3 class="card-title">🔄 Update Client Profile</h3>
+                        <p class="card-subtitle">Review and optimize existing coverage</p>
+                    </div>
+
+                    <form id="update-client-form">
+                        <div class="form-group">
+                            <label class="form-label">Select Client</label>
+                            <select id="selected-client" class="form-select" onchange="loadClientData()">
+                                <option value="">Choose client to update...</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Updated Home Value</label>
+                            <input type="number" id="update-home-value" class="form-input" placeholder="$450,000">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Updated Vehicle Values</label>
+                            <input type="number" id="update-vehicle-values" class="form-input" placeholder="$75,000">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Updated Annual Income</label>
+                            <input type="number" id="update-annual-income" class="form-input" placeholder="$120,000">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Current Savings</label>
+                            <input type="number" id="update-savings" class="form-input" placeholder="$85,000">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Current Life Insurance</label>
+                            <input type="number" id="update-life-insurance" class="form-input" placeholder="$250,000">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Coverage Review Notes</label>
+                            <textarea id="coverage-notes" class="form-input" rows="3" placeholder="Changes needed, concerns, opportunities..."></textarea>
+                        </div>
+
+                        <button type="button" onclick="updateClientAnalysis()" class="btn-success">Update Analysis</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agent Resource Page -->
+        <div id="agent-resource-page" class="page-content">
+            <div class="welcome-hero">
+                <h1 class="welcome-title">Professional Agent Resources</h1>
+                <p class="welcome-subtitle">Master scripts, techniques, and strategies for insurance sales excellence</p>
+            </div>
+
+            <h2 class="section-title">Professional Communication Scripts</h2>
+
+            <!-- New Client Scripts -->
+            <div class="script-section">
+                <h3 class="script-title">
+                    🎯 New Client Opening Script
+                </h3>
+                <div class="script-content">
+                    "Thank you for taking the time to meet with me today. I want you to know that insurance isn't just about protection - it's about building wealth and securing your family's future. Many people think insurance is an expense, but I'm going to show you how proper coverage actually creates wealth and protects everything you've worked for. Most families are severely underinsured and don't even know it. By the end of our time together, you'll understand exactly what you need and why every dollar you spend on insurance should be working harder than the money in your savings account."
+                </div>
+                <button class="copy-btn" onclick="copyScript('new-client-opening')">Copy Script</button>
+            </div>
+
+            <div class="script-section">
+                <h3 class="script-title">
+                    💰 Asset Protection Explanation
+                </h3>
+                <div class="script-content">
+                    "Let me show you why standard insurance limits are like bringing a knife to a gunfight. Your home, cars, savings - everything you've worked for - could be wiped out by one accident. But here's what most people don't understand: Insurance isn't just protection, it's leverage. When you have proper coverage, you're not just protecting your assets - you're leveraging the insurance company's massive financial resources to build YOUR wealth. Every dollar you spend on adequate coverage protects thousands of dollars in assets. That's the power of proper insurance planning."
+                </div>
+                <button class="copy-btn" onclick="copyScript('asset-protection')">Copy Script</button>
+            </div>
+
+            <div class="script-section">
+                <h3 class="script-title">
+                    🛡️ Liability Limit Education
+                </h3>
+                <div class="script-content">
+                    "I need you to understand something critical: Standard $300,000 policies are completely inadequate in today's world. Let me give you a real example. If you cause an accident injuring a successful doctor earning $500,000 per year, they could sue you for $10 million in lost income alone, plus $2 million in medical expenses, plus $5 million in pain and suffering. That's $17 million in potential liability. Your $300,000 policy wouldn't even cover the legal fees. This isn't fear-mongering - it's mathematical reality. Every day you drive without adequate coverage is like gambling with your family's future."
+                </div>
+                <button class="copy-btn" onclick="copyScript('liability-education')">Copy Script</button>
+            </div>
+
+            <!-- Current Client Scripts -->
+            <div class="script-section">
+                <h3 class="script-title">
+                    🔄 Current Client Review Script
+                </h3>
+                <div class="script-content">
+                    "I hope you're doing well! I'm reaching out because I believe in proactive client care, not just selling and disappearing. Your situation has likely changed since we last reviewed your coverage - maybe you've had promotions, bought new assets, or your family circumstances have evolved. Insurance isn't a 'set it and forget it' product. Your coverage should grow with your success. I want to make sure you have the right protection for where you are today, not where you were five years ago. Can we schedule a quick 30-minute review?"
+                </div>
+                <button class="copy-btn" onclick="copyScript('current-client-review')">Copy Script</button>
+            </div>
+
+            <div class="script-section">
+                <h3 class="script-title">
+                    📈 Wealth Building Through Insurance
+                </h3>
+                <div class="script-content">
+                    "Here's what successful people understand that others don't: Insurance is the ultimate wealth-building tool. When you have proper coverage, you can take calculated risks that build wealth because you're protected from catastrophic loss. People without adequate coverage live in constant fear and miss opportunities. But when you're properly insured, you can invest in real estate, start businesses, and pursue your dreams because you know you're protected. That's how insurance creates wealth - by giving you the confidence to pursue opportunities that build real assets."
+                </div>
+                <button class="copy-btn" onclick="copyScript('wealth-building')">Copy Script</button>
+            </div>
+
+            <!-- Closing Scripts -->
+            <div class="script-section">
+                <h3 class="script-title">
+                    🎯 Close with Urgency Script
+                </h3>
+                <div class="script-content">
+                    "I need you to understand that every day you wait is another day you're exposed to catastrophic financial loss. Your current coverage gaps aren't going away, and they could literally destroy everything you've worked for. I've shown you exactly what you need and why you need it. The question isn't whether this coverage makes sense - the only question is whether you're going to protect your family today or wait until it's too late. I have availability this week to get you properly covered. Are you ready to secure your family's financial future, or do you want to keep gambling with your wealth?"
+                </div>
+                <button class="copy-btn" onclick="copyScript('urgent-closing')">Copy Script</button>
+            </div>
+
+            <div class="script-section">
+                <h3 class="script-title">
+                    💎 Value Proposition Close
+                </h3>
+                <div class="script-content">
+                    "Let me tell you what makes me different from other insurance agents. I don't just sell policies - I build wealth protection strategies. Every client I work with becomes part of my advisory family. When your situation changes, I'm here to adjust your coverage. When you have questions, I answer personally. When you need claims support, you call me directly. This isn't about one transaction - it's about lifelong financial protection. The difference between adequate coverage and proper coverage could be millions of dollars for your family. Are you ready to work with someone who truly cares about your financial future?"
+                </div>
+                <button class="copy-btn" onclick="copyScript('value-close')">Copy Script</button>
+            </div>
+
+            <!-- Follow-up Scripts -->
+            <div class="script-section">
+                <h3 class="script-title">
+                    📞 Follow-up After Consultation
+                </h3>
+                <div class="script-content">
+                    "Hi [Client Name], this is [Your Name]. I wanted to follow up on our conversation about your insurance needs. I've been thinking about your situation, and I have some additional insights that could save you money while increasing your protection. Would you have 15 minutes this week for a quick call? I want to make sure you have all the information you need to make the best decision for your family's security. You can reach me at [phone] anytime."
+                </div>
+                <button class="copy-btn" onclick="copyScript('follow-up-consultation')">Copy Script</button>
+            </div>
+
+            <div class="script-section">
+                <h3 class="script-title">
+                    📧 Follow-up Email Template
+                </h3>
+                <div class="script-content">
+                    "Subject: Your Insurance Protection Review - Important Information<br><br>
+                    Dear [Client Name],<br><br>
+                    Thank you for taking the time to meet with me yesterday. Based on our discussion, I wanted to send you a quick summary of your insurance protection gaps and the solutions we discussed.<br><br>
+                    Key Points:<br>
+                    • Current liability exposure: $[amount]<br>
+                    • Recommended coverage increase: $[amount]<br>
+                    • Potential cost increase: $[amount] per year<br>
+                    • Protection gained: $[amount] in additional coverage<br><br>
+                    As we discussed, the cost of proper coverage is minimal compared to the wealth protection it provides. I'm available to answer any questions and move forward when you're ready.<br><br>
+                    Best regards,<br>
+                    [Your Name]"
+                </div>
+                <button class="copy-btn" onclick="copyScript('follow-up-email')">Copy Script</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
